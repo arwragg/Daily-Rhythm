@@ -1803,7 +1803,7 @@ function KidCard({kid,word,streak,rewards,goals,onToggleTask,onToggleBlock,onTog
 }
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
-export default function App(){
+function App(){
   const [kids,setKids]=useState(DEFAULT_KIDS);
   const [word,setWord]=useState(DEFAULT_WORD);
   const [settings,setSettings]=useState(DEFAULT_SETTINGS);
@@ -2228,6 +2228,12 @@ export default function App(){
     setWord(p=>{const n={...p};kids.forEach(k=>{if(n[k.id])n[k.id]={...n[k.id],verseRead:false};});return n;});
   }
 
+
+
+// Mount the app
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container);
+root.render(React.createElement(React.StrictMode, null, React.createElement(App)));
 
 </script>
 </body>
