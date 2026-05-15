@@ -37,6 +37,8 @@ if (!window.storage) {
 </script>
 
 <script type="text/babel" data-presets="react">
+const { useState, useEffect, useCallback, useRef } = React;
+
 
 // ─── PALETTE ──────────────────────────────────────────────────────────────────
 const PALETTES = {
@@ -2230,9 +2232,7 @@ function App(){
 
 
 
-// Mount the app
-const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container);
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(React.StrictMode, null, React.createElement(App)));
 
 </script>
