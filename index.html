@@ -4,18 +4,28 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>The Daily Rhythm ✶</title>
+  <style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{background:#f5f5f3;min-height:100vh;margin:0;padding:16px;font-family:system-ui,-apple-system,sans-serif}
+  #root{max-width:680px;margin:0 auto}
+  input,select,textarea,button{color:#111;background:#fff;border:.5px solid #ccc;border-radius:8px;outline:none;padding:8px 10px;font-family:inherit;font-size:13px}
+  input:focus,select:focus,textarea:focus{border-color:#534ab7;box-shadow:0 0 0 2px rgba(83,74,183,.15)}
+  button{cursor:pointer;background:transparent;border:.5px solid #ccc;padding:8px 14px;transition:opacity .15s,background .15s}
+  button:hover{background:#f0f0f0}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  </style>
 </head>
 <body>
   <div id="root"></div>
   <script>
   (function(){
     if(window.storage)return;
-    function safe_ls(){try{return localStorage}catch(e){return null}}
+    function ls(){try{return localStorage}catch(e){return null}}
     window.storage={
-      get:function(k){return new Promise(function(r){var s=safe_ls(),v=s&&s.getItem(k);r(v?{key:k,value:v}:null)})},
-      set:function(k,v){return new Promise(function(r){var s=safe_ls();if(s)try{s.setItem(k,v)}catch(e){};r({key:k,value:v})})},
-      delete:function(k){return new Promise(function(r){var s=safe_ls();if(s)s.removeItem(k);r({key:k,deleted:true})})},
-      list:function(p){return new Promise(function(r){var s=safe_ls();if(!s)return r({keys:[]});p=p||'';var ks=[];for(var i=0;i<s.length;i++){var k=s.key(i);if(k&&k.startsWith(p))ks.push(k)}r({keys:ks})})}
+      get:function(k){return new Promise(function(r){var s=ls(),v=s&&s.getItem(k);r(v?{key:k,value:v}:null)})},
+      set:function(k,v){return new Promise(function(r){var s=ls();if(s){try{s.setItem(k,v)}catch(e){}}r({key:k,value:v})})},
+      delete:function(k){return new Promise(function(r){var s=ls();if(s)s.removeItem(k);r({key:k,deleted:true})})},
+      list:function(p){return new Promise(function(r){var s=ls();if(!s)return r({keys:[]});p=p||"";var ks=[];for(var i=0;i<s.length;i++){var k=s.key(i);if(k&&k.startsWith(p))ks.push(k);}r({keys:ks})})}
     };
   })();
   </script>
